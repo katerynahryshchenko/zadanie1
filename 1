@@ -8,7 +8,7 @@ float y;
 }POINT;
 
 typedef struct{
-POINT c;
+POINT p;
 float r;
 }CIRCLE;
 
@@ -22,7 +22,17 @@ char circ_circ_inner_tangents(CIRCLE *c1, CIRCLE *c2, LINE *t1, LINE *t2){
 	
 }
 
-int main{
-
+int main(){
+	float x1, x2, y1, y2, r1, r2;
+	puts("Zadajte x-ovu a y-ovu suradnice stredu a priemer 1 kruznice");
+		scanf("%f %f %f", &x1, &y1, &r1);
+	puts("Zadajte x-ovu a y-ovu suradnice stredu a priemer 2 kruznice");
+		scanf("%f %f %f", &x2, &y2, &r2);	
+	POINT p1 = {x1, y1};
+	CIRCLE c1 ={p1, r1};
+	POINT p2 = {x2, y2};
+	CIRCLE c2 ={p2, r2};
+	LINE t1;
+	LINE t2;
 return 0;
 }
