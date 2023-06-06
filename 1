@@ -19,6 +19,18 @@ float c;
 }LINE;
 
 char circ_circ_inner_tangents(CIRCLE *c1, CIRCLE *c2, LINE *t1, LINE *t2){
+	float d, r;
+	d=sqrt(pow((c1->p->x-c2->p->x),2)+pow((c1->p->y-c2->p->y),2));
+	r=c1->r+c2->r;
+	if(d<r){
+	puts("neexistuju vnutorne dotycnice");
+	};
+	if(d=r){
+	puts("existuje jedna vnutorna dotycnica");
+	
+	};
+	else { puts("existuju dve vnutorne dotycnica");
+	}
 	
 }
 
