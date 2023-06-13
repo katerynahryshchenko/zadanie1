@@ -21,22 +21,22 @@ float c;
 
 char circ_circ_inner_tangents(CIRCLE *c1, CIRCLE *c2, LINE *t1, LINE *t2){
 	float d, r, vx, vy, bodx, body;
-	d = sqrt(pow((c1->p->x-c2->p->x),2)+pow((c1->p->y-c2->p->y),2));
+	d = sqrt(pow((c1->p.x-c2->p.x),2)+pow((c1->p.y-c2->p.y),2));
 	r = c1->r+c2->r;
 	if (d<r) {
 	return 0;
 	};
 	if (d=r) {
-	vx = (c2->p->x-c1->p->x)/d;
-	vy = (c2->p->y-c1->p->y)/d; 	
-	bodx = c1->p->x + vx*c1->r;
-	body = c1->p->y + vy*c1->r;
-	t1->a = -vy;	
-	t1->b = vx;	
+	vx = (c2->p.x-c1->p.x)/d;
+	vy = (c2->p.y-c1->p.y)/d; 	
+	bodx = c1->p.x + vx*c1->r;
+	body = c1->p.y + vy*c1->r;
+	t1->a = vx;	
+	t1->b = vy;	
 	t1->c = -bodx*t1->a-body*t1->b;	
 	return 1;
 	};
-	else {
+	if (d>r) {
 	return 2;
 	}
 	
@@ -54,19 +54,19 @@ int main(){
 	POINT p2 = {x2, y2};
 	CIRCLE c2 = {p2, r2};
 	LINE t1, t2;
-	char result = circ_circ_inner_tangents(CIRCLE &c1, CIRCLE &c2, LINE &t1, LINE &t2);
+	char result = circ_circ_inner_tangents(&c1, &c2, &t1, &t2);
 	switch (result){
 		case 0:
     			puts("neexistuju vnutorne dotycnice");
     			break;
  	    	case 1:
  			puts("existuje jedna vnutorna dotycnica");
- 			printf("Rovnica: %fx+%fy+%f=0\n", t1.a, t1.b, t1.c);
- 		   	break;
+ 			printf("Rovnica: %0.2fx%+-0.2fy%+-0.2f=0\n", t1.a, t1.b, t1.c);
+ 		  	break;
  		case 2:
 			puts("existuju dve vnutorne dotycnice");
- 			printf("Rovnica 1: %fx+%fy+%f=0\n", t1.a, t1.b, t1.c);
- 		    	printf("Rovnica 2: %fx+%fy+%f=0\n", t2.a, t2.b, t2.c);
+ 			printf("Rovnica 1: %0.2fx%+-0.2fy%+-0.2f=0\n", t1.a, t1.b, t1.c);
+ 		  	printf("Rovnica 2: %0.2fx%+-0.2fy%+-0.2f=0\n", t2.a, t2.b, t2.c);
     			break;
 	};
 return 0;
