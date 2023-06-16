@@ -21,7 +21,7 @@ float c;
 
 char circ_circ_inner_tangents(CIRCLE *c1, CIRCLE *c2, LINE *t1, LINE *t2){
 	float d, r, vx, vy, bodx, body, q, bod1x, bod2x, bod3x, bod4x, q2, bod1y, bod2y, bod3y, bod4y;
-	d = sqrt(pow((c1->p.x-c2->p.x),2)+pow((c1->p.y-c2->p.y),2));
+	d = sqrt((c1->p.x-c2->p.x)*(c1->p.x-c2->p.x)+(c1->p.y-c2->p.y)*(c1->p.y-c2->p.y));
 	r = c1->r+c2->r;
 	if (d<r) {
 	return 0;
