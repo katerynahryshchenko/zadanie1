@@ -1,6 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #define NULA_VNOTURNYCH_DOTYCNIC 0
 #define JEDNA_VNOTURNA_DOTYCNICA 1
 #define DVE_VNOTURNE_DOTYCNICE 2
