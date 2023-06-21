@@ -39,7 +39,7 @@ void init (CIRCLE *c1, CIRCLE *c2) {
 }
 
 char circ_circ_inner_tangents(CIRCLE *c1, CIRCLE *c2, LINE *t1, LINE *t2) {
-	float d, r, vx, vy, bodx, body, q, bod1x, bod2x, bod3x, bod4x, q2, bod1y, bod2y, bod3y, bod4y;
+	float d, r, vx, vy, bodx, body, q, bod1x, bod2x, bod3x, bod4x, q2, bod1y, bod2y, bod3y, bod4y, qsin, qcos, q2sin, q2cos;
 	
 	d = sqrt((c1->p.x - c2->p.x) * (c1->p.x - c2->p.x) + (c1->p.y - c2->p.y) * (c1->p.y - c2->p.y));
 	r = c1->r + c2->r;
@@ -62,24 +62,31 @@ char circ_circ_inner_tangents(CIRCLE *c1, CIRCLE *c2, LINE *t1, LINE *t2) {
 	
 	if (d>r) {
 		q = atan2(c2->p.y - c1->p.y, c2->p.x - c1->p.x) + asin(r/d) - M_PI/2;
-		bod1x = c1->p.x + cos(q) * c1->r;
-		bod1y = c1->p.y + sin(q) * c1->r;
-		bod2x = c2->p.x + cos(q+M_PI) * c2->r;
-		bod2y = c2->p.y + sin(q+M_PI) * c2->r;
+		qsin - sin(q);
+		qcos = cos(q);
 		
-		t1->a = bod2y - bod1y; 	
-		t1->b = bod1x - bod2x;
+		bod1x = c1->p.x + qcos*c1->r;
+		bod1y = c1->p.y + qsin*c1->r;
+		bod2x = c2->p.x - qcos*c2->r;
+		bod2y = c2->p.y - qsin*c2->r;
+		
+		t1->a = bod2y-bod1y; 	
+		t1->b = bod1x-bod2x;
 		t1->c = - bod1x * t1->a - bod1y * t1->b;
 			
 		q2 = atan2(c2->p.y - c1->p.y, c2->p.x - c1->p.x) - asin(r/d) + M_PI/2;
-		bod3x = c1->p.x + cos(q2) * c1->r;
-		bod3y = c1->p.y + sin(q2) * c1->r;
-		bod4x = c2->p.x + cos(q2+M_PI) * c2->r;
-		bod4y = c2->p.y + sin(q2+M_PI) * c2->r;
+		q2sin - sin(q2);
+		q2cos = cos(q2);
 		
-		t2->a = bod4y - bod3y;	
-		t2->b = bod3x - bod4x;
-		t2->c = - bod3x * t2->a - bod3y * t2->b;
+		bod3x = c1->p.x + q2cos*c1->r;
+		bod3y = c1->p.y + q2sin*c1->r;
+		bod4x = c2->p.x - q2cos*c2->r;
+		bod4y = c2->p.y - q2sin*c2->r;
+		
+	
+		t2->a = bod4y-bod3y;	
+		t2->b = bod3x-bod4x;
+		t2->c = -bod3x*t2->a-bod3y*t2->b;
 			
 		return DVE_VNOTURNE_DOTYCNICE;
 	}	
